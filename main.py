@@ -1,25 +1,20 @@
-import tkinter as tk
+# Import the necessary classes and modules
+from tkinter import Tk, Button
+from classes import MyClass
 
-# Create a new instance of Tkinter window
-window = tk.Tk()
+# Create an instance of the class
+my_object = MyClass("John")
 
-# Set the window title
-window.title("My GUI Application")
-
-# Create a label widget
-label = tk.Label(window, text="Hello, World!")
-label.pack()
-
-# Create a button widget
-button = tk.Button(window, text="Click Me!")
-button.pack()
-
-# Function to execute when the button is clicked
+# Define a function to execute on button click
 def button_click():
-    label.config(text="Button Clicked!")
+    my_object.greet()
 
-# Bind the button click event to the function
-button.config(command=button_click)
+# Create the GUI window
+window = Tk()
+
+# Create a button that calls the function on click
+button = Button(window, text="Click Me!", command=button_click)
+button.pack()
 
 # Start the Tkinter event loop
 window.mainloop()
