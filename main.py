@@ -1,134 +1,108 @@
-from tkinter import Tk, Label, Button, Entry, StringVar, IntVar
+import tkinter as tk
+from tkinter import ttk
 from classes import Pie, Cake, Cookie
 
-class DessertApp:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Dessert Customizer")
+def order_desserts():
+    # Get the quantities of each dessert
+    pie_qty = pie_spinbox.get()
+    cake_qty = cake_spinbox.get()
+    cookie_qty = cookie_spinbox.get()
 
-        self.dessert_quantities = {
-            "Pie": IntVar(),
-            "Cake": IntVar(),
-            "Cookie": IntVar()
-        }
+    # Create dessert objects with the given quantities
+    pie = Pie(flavor="Apple", size="Medium", topping="Ice cream", filling="Apple")
+    cake = Cake(flavor="Chocolate", size="Large", topping="Sprinkles", layers=2)
+    cookie = Cookie(flavor="Chocolate Chip", size="Small", topping="Chocolate drizzle", shape="Circle")
 
-        self.customizations = []
+    # For now, let's just print the order summary
+    print("Order Summary:")
+    print(f"Pies: {pie_qty}, {pie}")
+    print(f"Cakes: {cake_qty}, {cake}")
+    print(f"Cookies: {cookie_qty}, {cookie}")
 
-        self.create_quantity_page()
+def customize_desserts():
+    # Create widgets for the customization page
+    customize_frame = ttk.Frame(tab2)
+    customize_frame.pack(fill="both", expand=True)
 
-    def create_quantity_page(self):
-        Label(self.root, text="Choose the quantity of each dessert:").pack()
+    # Add widgets for customizing desserts (you can modify this part based on your desired options)
+    label = ttk.Label(customize_frame, text="Customize your desserts:")
+    label.pack()
 
-        for dessert_type, var in self.dessert_quantities.items():
-            Label(self.root, text=dessert_type).pack()
-            Entry(self.root, textvariable=var).pack()
+    # For example, you can use Entry widgets, Checkbuttons, Radiobuttons, etc., for different attributes.
+    # Here, we use simple Entry widgets to allow the user to specify custom flavors for each dessert.
+    pie_flavor_label = ttk.Label(customize_frame, text="Pie Flavor:")
+    pie_flavor_label.pack()
+    pie_flavor_entry = ttk.Entry(customize_frame)
+    pie_flavor_entry.pack()
 
-        Button(self.root, text="Next", command=self.create_customization_page).pack()
+    cake_flavor_label = ttk.Label(customize_frame, text="Cake Flavor:")
+    cake_flavor_label.pack()
+    cake_flavor_entry = ttk.Entry(customize_frame)
+    cake_flavor_entry.pack()
 
-    def create_customization_page(self):
-        Label(self.root, text="Customize your desserts:").pack()
+    cookie_flavor_label = ttk.Label(customize_frame, text="Cookie Flavor:")
+    cookie_flavor_label.pack()
+    cookie_flavor_entry = ttk.Entry(customize_frame)
+    cookie_flavor_entry.pack()
 
-        for dessert_type, quantity_var in self.dessert_quantities.items():
-            quantity = quantity_var.get()
-            if quantity > 0:
-                Label(self.root, text=dessert_type).pack()
-                for _ in range(quantity):
-                    dessert_customization = {}
+    # Add a "Confirm" button to save the customization
+    confirm_button = ttk.Button(customize_frame, text="Confirm", command=save_customization)
+    confirm_button.pack()
 
-                    Label(self.root, text="Flavor:").pack()
-                    flavor_entry = Entry(self.root)
-                    flavor_entry.pack()
-                    dessert_customization["flavor"] = flavor_entry
+def save_customization():
+    # Retrieve the selected custom flavors for each dessert
+    pie_flavor = pie_flavor_entry.get()
+    cake_flavor = cake_flavor_entry.get()
+    cookie_flavor = cookie_flavor_entry.get()
 
-                    if dessert_type == "Pie":
-                        Label(self.root, text="Filling:").pack()
-                        filling_entry = Entry(self.root)
-                        filling_entry.pack()
-                        dessert_customization["filling"] = filling_entry
+    # Use the selected custom flavors to update the dessert objects accordingly
+    Pie.flavor = pie_flavor
+    Cake.flavor = cake_flavor
+    Cookie.flavor = cookie_flavor
 
-                        Label(self.root, text="Crust:").pack()
-                        crust_entry = Entry(self.root)
-                        crust_entry.pack()
-                        dessert_customization["crust"] = crust_entry
+    # Print a confirmation message
+    print("Customization saved!")
 
-                    elif dessert_type == "Cake":
-                        Label(self.root, text="Frosting:").pack()
-                        frosting_entry = Entry(self.root)
-                        frosting_entry.pack()
-                        dessert_customization["frosting"] = frosting_entry
+# Create the main application window
+root = tk.Tk()
+root.title("Dessert Customization")
 
-                        Label(self.root, text="Layers:").pack()
-                        layers_entry = Entry(self.root)
-                        layers_entry.pack()
-                        dessert_customization["layers"] = layers_entry
+# Create a notebook to handle multiple tabs/pages
+notebook = ttk.Notebook(root)
+notebook.pack(fill="both", expand=True)
 
-                    elif dessert_type == "Cookie":
-                        Label(self.root, text="Size:").pack()
-                        size_entry = Entry(self.root)
-                        size_entry.pack()
-                        dessert_customization["size"] = size_entry
+# Tab 1 - Order Page
+tab1 = ttk.Frame(notebook)
+notebook.add(tab1, text="Order")
 
-                        Label(self.root, text="Texture:").pack()
-                        texture_entry = Entry(self.root)
-                        texture_entry.pack()
-                        dessert_customization["texture"] = texture_entry
+label = ttk.Label(tab1, text="How many of each dessert would you like to order?")
+label.pack()
 
-                    self.customizations.append(dessert_customization)
+# Pie
+pie_label = ttk.Label(tab1, text="Pies:")
+pie_label.pack()
+pie_spinbox = ttk.Spinbox(tab1, from_=0, to=10)
+pie_spinbox.pack()
 
-        Button(self.root, text="Submit", command=self.display_customization).pack()
+# Cake
+cake_label = ttk.Label(tab1, text="Cakes:")
+cake_label.pack()
+cake_spinbox = ttk.Spinbox(tab1, from_=0, to=10)
+cake_spinbox.pack()
 
-    def display_customization(self):
-        Label(self.root, text="Your Dessert Customization:").pack()
+# Cookie
+cookie_label = ttk.Label(tab1, text="Cookies:")
+cookie_label.pack()
+cookie_spinbox = ttk.Spinbox(tab1, from_=0, to=10)
+cookie_spinbox.pack()
 
-        for dessert_customization in self.customizations:
-            flavor_entry = dessert_customization["flavor"]
-            dessert_type = None
-            dessert = None
+# Order button
+order_button = ttk.Button(tab1, text="Next", command=customize_desserts)
+order_button.pack()
 
-            for dessert_type in self.dessert_quantities:
-                if flavor_entry.get():
-                    if dessert_type == "Pie":
-                        filling_entry = dessert_customization["filling"]
-                        crust_entry = dessert_customization["crust"]
-                        dessert = Pie(
-                            flavor_entry.get(),
-                            filling_entry.get(),
-                            crust_entry.get()
-                        )
-                    elif dessert_type == "Cake":
-                        frosting_entry = dessert_customization["frosting"]
-                        layers_entry = dessert_customization["layers"]
-                        dessert = Cake(
-                            flavor_entry.get(),
-                            frosting_entry.get(),
-                            layers_entry.get()
-                        )
-                    elif dessert_type == "Cookie":
-                        size_entry = dessert_customization["size"]
-                        texture_entry = dessert_customization["texture"]
-                        dessert = Cookie(
-                            flavor_entry.get(),
-                            size_entry.get(),
-                            texture_entry.get()
-                        )
-                    break
+# Tab 2 - Customization Page (will be created when "Next" button is clicked)
+tab2 = ttk.Frame(notebook)
+notebook.add(tab2, text="Customize")
 
-            if dessert:
-                Label(self.root, text=f"Dessert Type: {dessert_type}").pack()
-                Label(self.root, text=f"Flavor: {dessert.flavor}").pack()
-
-                if isinstance(dessert, Pie):
-                    Label(self.root, text=f"Filling: {dessert.filling}").pack()
-                    Label(self.root, text=f"Crust: {dessert.crust}").pack()
-
-                elif isinstance(dessert, Cake):
-                    Label(self.root, text=f"Frosting: {dessert.frosting}").pack()
-                    Label(self.root, text=f"Layers: {dessert.layers}").pack()
-
-                elif isinstance(dessert, Cookie):
-                    Label(self.root, text=f"Size: {dessert.size}").pack()
-                    Label(self.root, text=f"Texture: {dessert.texture}").pack()
-
-root = Tk()
-DessertApp(root)
+# Start the main event loop
 root.mainloop()

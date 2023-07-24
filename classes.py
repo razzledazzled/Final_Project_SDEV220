@@ -1,35 +1,32 @@
-# Define your classes in this file
-
-class MyClass:
-    def __init__(self, name):
-        self.name = name
-
-    def greet(self):
-        print(f"Hello, {self.name}!")
-
-#Sample Dessert super class
 class Dessert:
-    def __init__(self, flavor, price):
+    def __init__(self, flavor, size, topping):
         self.flavor = flavor
-        self.price = price
+        self.size = size
+        self.topping = topping
 
+    def __str__(self):
+        return f"{self.size} {self.flavor} with {self.topping}"
 
 class Pie(Dessert):
-    def __init__(self, flavor, price, filling_type, crust_type):
-        super().__init__(flavor, price)
-        self.filling_type = filling_type
-        self.crust_type = crust_type
+    def __init__(self, flavor, size, topping, filling):
+        super().__init__(flavor, size, topping)
+        self.filling = filling
 
+    def __str__(self):
+        return f"{self.size} {self.flavor} with {self.filling} filling, topped with {self.topping}"
 
 class Cake(Dessert):
-    def __init__(self, flavor, price, frosting_type, layers):
-        super().__init__(flavor, price)
-        self.frosting_type = frosting_type
+    def __init__(self, flavor, size, topping, layers):
+        super().__init__(flavor, size, topping)
         self.layers = layers
 
+    def __str__(self):
+        return f"{self.size} {self.flavor} cake with {self.layers} layers, topped with {self.topping}"
 
 class Cookie(Dessert):
-    def __init__(self, flavor, price, size, texture):
-        super().__init__(flavor, price)
-        self.size = size
-        self.texture = texture
+    def __init__(self, flavor, size, topping, shape):
+        super().__init__(flavor, size, topping)
+        self.shape = shape
+
+    def __str__(self):
+        return f"{self.size} {self.flavor} cookie ({self.shape}), topped with {self.topping}"
