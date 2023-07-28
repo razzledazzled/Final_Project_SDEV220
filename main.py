@@ -8,7 +8,7 @@ from classes import Pie
 class DessertOrderApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Dessert Order App")
+        self.root.title("Pie or Die: Customize Your Order")
         
         self.cart = []  # List to store the selected desserts
         
@@ -28,6 +28,9 @@ class DessertOrderApp:
         pie_customization_window = tk.Toplevel(self.root)
         pie_customization_window.title("Customize Pie")
 
+        # Set the width and height of the window
+        pie_customization_window.geometry("400x200")
+
         # Create a new instance of the Pie class for customization
         pie_instance = Pie()
 
@@ -43,6 +46,8 @@ class DessertOrderApp:
             pie_instance.set_filling(filling_var.get())
             self.cart.append(pie_instance)
             messagebox.showinfo("Success", "Pie added to cart!")
+            # Close the "Customize Pie" subwindow after adding to the cart
+            pie_customization_window.destroy()
 
         # Create option menus for each pie attribute
         crust_label = tk.Label(pie_customization_window, text="Crust Type:")
@@ -76,4 +81,8 @@ class DessertOrderApp:
 if __name__ == "__main__":
     root = tk.Tk()
     app = DessertOrderApp(root)
+
+    # Set the width and height of the main window
+    root.geometry("400x300")
+
     root.mainloop()
