@@ -6,34 +6,60 @@ class Dessert:
     def __str__(self):
         return f"{self.name} - ${self.price:.2f}"
 
-
 class Pie:
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
-        self.crust_type = None
-        self.filling = None
+    def __init__(self):
+        # Default values for a basic pie
+        self.crust_type = "Regular"
+        self.size = "Small"
+        self.filling = "Apple"
+        self.price = 10.00  # Base price for a basic pie
 
     def set_crust_type(self, crust_type):
-        crust_options = ["Regular", "Chocolate"]
-        if crust_type in crust_options:
-            self.crust_type = crust_type
+        # Set the crust type and update the price accordingly
+        if crust_type == "Regular":
+            self.crust_type = "Regular"
+            self.price += 0.00
+        elif crust_type == "Graham Cracker":
+            self.crust_type = "Graham Cracker"
+            self.price += 2.00
+        elif crust_type == "Chocolate":
+            self.crust_type = "Chocolate"
+            self.price += 3.00
         else:
-            raise ValueError(f"Invalid crust type. Available options: {', '.join(crust_options)}")
+            print("Invalid crust type.")
+
+    def set_size(self, size):
+        # Set the pie size and update the price accordingly
+        if size == "Small":
+            self.size = "Small"
+            self.price += 0.00
+        elif size == "Medium":
+            self.size = "Medium"
+            self.price += 5.00
+        elif size == "Large":
+            self.size = "Large"
+            self.price += 10.00
+        else:
+            print("Invalid size.")
 
     def set_filling(self, filling):
-        filling_options = ["Cherry", "Apple", "Pumpkin"]
-        if filling in filling_options:
-            self.filling = filling
+        # Set the pie filling and update the price accordingly
+        if filling == "Apple":
+            self.filling = "Apple"
+            self.price += 0.00
+        elif filling == "Cherry":
+            self.filling = "Cherry"
+            self.price += 2.00
+        elif filling == "Blueberry":
+            self.filling = "Blueberry"
+            self.price += 3.00
         else:
-            raise ValueError(f"Invalid filling. Available options: {', '.join(filling_options)}")
+            print("Invalid filling.")
 
-    def calculate_price(self):
-        # Add additional logic here to calculate the price based on the customization options
-        pass
+    def get_price(self):
+        # Return the final price of the customized pie
+        return self.price
 
-    def __str__(self):
-        return f"{self.name} - ${self.price:.2f}\nCrust: {self.crust_type}\nFilling: {self.filling}"
 
 
 

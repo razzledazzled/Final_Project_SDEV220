@@ -1,67 +1,79 @@
 import tkinter as tk
-from tkinter import ttk
-
+from tkinter import messagebox
 from classes import Pie
 
-def customize_dessert(dessert_name):
-    if dessert_name == "Pie":
-        pie_customization_window = tk.Toplevel(root)
-        pie_customization_window.title("Customize your Pie!")
+# Import the Pie class from the previous code snippet
+# Make sure the Pie class is defined in the same script or imported properly
 
-        # Create a new instance of Pie
-        pie = Pie("Custom Pie", price=0.00)
+class DessertOrderApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Dessert Order App")
+        
+        self.cart = []  # List to store the selected desserts
+        
+        self.create_widgets()
 
-        # Function to update the selected crust type
-        def set_crust_type(*args):
-            crust_type = crust_var.get()
-            pie.set_crust_type(crust_type)
+    def create_widgets(self):
+        # Create the buttons for each dessert type
+        pie_button = tk.Button(self.root, text="Pie", command=self.open_pie_customization)
+        pie_button.pack()
 
-        # Function to update the selected filling
-        def set_filling(*args):
-            filling = filling_var.get()
-            pie.set_filling(filling)
+        # Create a cart button to view the cart
+        cart_button = tk.Button(self.root, text="View Cart", command=self.view_cart)
+        cart_button.pack()
 
-        # Label and option menu for crust type
+    def open_pie_customization(self):
+        # Create a new subwindow for customizing the pie
+        pie_customization_window = tk.Toplevel(self.root)
+        pie_customization_window.title("Customize Pie")
+
+        # Create a new instance of the Pie class for customization
+        pie_instance = Pie()
+
+        # Create a variable to store the selected options
+        crust_var = tk.StringVar()
+        size_var = tk.StringVar()
+        filling_var = tk.StringVar()
+
+        # Function to add the customized pie to the cart
+        def add_to_cart():
+            pie_instance.set_crust_type(crust_var.get())
+            pie_instance.set_size(size_var.get())
+            pie_instance.set_filling(filling_var.get())
+            self.cart.append(pie_instance)
+            messagebox.showinfo("Success", "Pie added to cart!")
+
+        # Create option menus for each pie attribute
         crust_label = tk.Label(pie_customization_window, text="Crust Type:")
-        crust_label.pack(padx=10, pady=5)
+        crust_label.pack()
+        crust_menu = tk.OptionMenu(pie_customization_window, crust_var, "Regular", "Graham Cracker", "Chocolate")
+        crust_menu.pack()
 
-        crust_options = ["Regular", "Chocolate"]
-        crust_var = tk.StringVar(pie_customization_window)
-        crust_var.set(crust_options[0])  # Set the default value
-        crust_var.trace("w", set_crust_type)  # Call set_crust_type when the value changes
+        size_label = tk.Label(pie_customization_window, text="Size:")
+        size_label.pack()
+        size_menu = tk.OptionMenu(pie_customization_window, size_var, "Small", "Medium", "Large")
+        size_menu.pack()
 
-        crust_option_menu = ttk.OptionMenu(pie_customization_window, crust_var, *crust_options)
-        crust_option_menu.pack(padx=10, pady=5)
-
-        # Label and option menu for filling
         filling_label = tk.Label(pie_customization_window, text="Filling:")
-        filling_label.pack(padx=10, pady=5)
+        filling_label.pack()
+        filling_menu = tk.OptionMenu(pie_customization_window, filling_var, "Apple", "Cherry", "Blueberry")
+        filling_menu.pack()
 
-        filling_options = ["Cherry", "Apple", "Pumpkin"]
-        filling_var = tk.StringVar(pie_customization_window)
-        filling_var.set(filling_options[0])  # Set the default value
-        filling_var.trace("w", set_filling)  # Call set_filling when the value changes
+        # Button to add the customized pie to the cart
+        add_to_cart_button = tk.Button(pie_customization_window, text="Add to Cart", command=add_to_cart)
+        add_to_cart_button.pack()
 
-        filling_option_menu = ttk.OptionMenu(pie_customization_window, filling_var, *filling_options)
-        filling_option_menu.pack(padx=10, pady=5)
+    def view_cart(self):
+        # Display the selected desserts in the cart
+        if not self.cart:
+            messagebox.showinfo("Empty Cart", "Your cart is empty.")
+        else:
+            cart_items = "\n".join([f"{dessert.crust_type} Pie ({dessert.size}, {dessert.filling}): ${dessert.get_price():.2f}" for dessert in self.cart])
+            messagebox.showinfo("Cart", f"Cart items:\n{cart_items}")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.title("Dessert Ordering System")
-
-    # Sample dessert names
-    desserts = ["Pie", "Cake", "Cookies"]
-
-    # Create a frame to hold the dessert names and buttons
-    dessert_frame = tk.Frame(root, padx=20, pady=20)
-    dessert_frame.pack()
-
-    # Display the dessert names and "Customize" buttons side by side using the grid layout
-    for index, dessert in enumerate(desserts):
-        dessert_label = tk.Label(dessert_frame, text=dessert, font=("Arial", 14))
-        dessert_label.grid(row=index, column=0, padx=10, pady=10)
-
-        customize_button = tk.Button(dessert_frame, text="Customize", command=lambda dessert_name=dessert: customize_dessert(dessert_name))
-        customize_button.grid(row=index, column=1, padx=10, pady=10)
-
+    app = DessertOrderApp(root)
     root.mainloop()
