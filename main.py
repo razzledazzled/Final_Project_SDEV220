@@ -14,8 +14,11 @@ class DessertOrderApp:
 
     def create_widgets(self):
         # Create the buttons for each dessert type
-        pie_button = tk.Button(self.root, text="Pie", command=self.open_pie_customization)
+        pie_button = tk.Button(self.root, text="Build Your Pie", command=self.open_pie_customization)
         pie_button.pack()
+
+        cake_button = tk.Button(self.root, text="Customize Your Cake", command=self.open_cake_customization)
+        cake_button.pack()
 
         # Create a cart button to view the cart
         cart_button = tk.Button(self.root, text="View Cart", command=self.view_cart)
@@ -66,6 +69,29 @@ class DessertOrderApp:
         # Button to add the customized pie to the cart
         add_to_cart_button = tk.Button(pie_customization_window, text="Add to Cart", command=add_to_cart)
         add_to_cart_button.pack()
+
+    def open_cake_customization(self):
+        # Create a new subwindow for customizing the cake
+        cake_customizaiton_window = tk.Toplevel(self.root)
+        cake_customizaiton_window.title("Customize Pie")
+
+        # Set the width and height of window
+        cake_customizaiton_window.geometry("400X200")
+
+        # Create a new instance of the Cake class for customization
+        cake_instance = Cake()
+
+        # Create a variable to store the selected options
+        flavor_var = tk.StringVar()
+        size_var = tk.StringVar()
+        icing_var = tk.StringVar()
+        toppings_var = tk.StringVar()
+        layers_var = tk.StringVar()
+
+        # Function to add the cusomized cake to the chart
+        def add_to_cart():
+            cake_instance.set_flavor(flavor_var.get())
+            cake_instance.set_size(size_var.get()) #LAST WORKED HERE
 
     def view_cart(self):
         # Display the selected desserts in the cart
