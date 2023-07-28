@@ -53,6 +53,9 @@ class Pie:
         elif filling == "Blueberry":
             self.filling = "Blueberry"
             self.price += 3.00
+        elif filling == "Pumpkin":
+            self.filling = "Pumpkin"
+            self.price += 3.50
         else:
             print("Invalid filling.")
 

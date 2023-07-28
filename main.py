@@ -1,9 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from classes import Pie
-
-# Import the Pie class from the previous code snippet
-# Make sure the Pie class is defined in the same script or imported properly
+from classes import Cake
 
 class DessertOrderApp:
     def __init__(self, root):
@@ -62,7 +60,7 @@ class DessertOrderApp:
 
         filling_label = tk.Label(pie_customization_window, text="Filling:")
         filling_label.pack()
-        filling_menu = tk.OptionMenu(pie_customization_window, filling_var, "Apple", "Cherry", "Blueberry")
+        filling_menu = tk.OptionMenu(pie_customization_window, filling_var, "Apple", "Cherry", "Blueberry", "Pumpkin")
         filling_menu.pack()
 
         # Button to add the customized pie to the cart
