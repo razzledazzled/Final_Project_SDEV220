@@ -21,7 +21,7 @@ class DessertOrderApp:
 
         # Create a cart button to view the cart
         cart_button = tk.Button(self.root, text="View Cart", command=self.view_cart)
-        cart_button.pack()
+        cart_button.pack(side='right', anchor='ne', padx=10, pady=10)
 
     def open_pie_customization(self):
         # Create a new subwindow for customizing the pie
