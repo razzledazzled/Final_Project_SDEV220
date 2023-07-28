@@ -72,11 +72,11 @@ class DessertOrderApp:
 
     def open_cake_customization(self):
         # Create a new subwindow for customizing the cake
-        cake_customizaiton_window = tk.Toplevel(self.root)
-        cake_customizaiton_window.title("Customize Pie")
+        cake_customization_window = tk.Toplevel(self.root)
+        cake_customization_window.title("Customize Cake")
 
         # Set the width and height of window
-        cake_customizaiton_window.geometry("400X200")
+        cake_customization_window.geometry("400x200")
 
         # Create a new instance of the Cake class for customization
         cake_instance = Cake()
@@ -91,7 +91,21 @@ class DessertOrderApp:
         # Function to add the cusomized cake to the chart
         def add_to_cart():
             cake_instance.set_flavor(flavor_var.get())
-            cake_instance.set_size(size_var.get()) #LAST WORKED HERE
+            #cake_instance.set_size(size_var.get()) #HERE WHEN NEW CLASS STUFF IS ADDED
+            self.cart.append(cake_instance)
+            messagebox.showinfo("Success", "Cake added to cart!")
+            # Close the "Customize Cake" subwindow after adding to the cart
+            cake_customization_window.destroy()
+        
+        #Create option menus for each cake attribute
+        flavor_label = tk.Label(cake_customization_window, text="Flavor Type:")
+        flavor_label.pack()
+        flavor_menu = tk.OptionMenu(cake_customization_window, flavor_var, "Vanilla", "Chocolate", "Carrot", "New York Cheesecake")
+        flavor_menu.pack()
+        
+        # Button to add the customized pie to the cart
+        add_to_cart_button = tk.Button(cake_customization_window, text="Add to Cart", command=add_to_cart)
+        add_to_cart_button.pack()
 
     def view_cart(self):
         # Display the selected desserts in the cart
@@ -99,7 +113,7 @@ class DessertOrderApp:
             messagebox.showinfo("Empty Cart", "Your cart is empty.")
         else:
             cart_items = "\n".join([f"{dessert.crust_type} Pie ({dessert.size}, {dessert.filling}): ${dessert.get_price():.2f}" for dessert in self.cart])
-            messagebox.showinfo("Cart", f"Cart items:\n{cart_items}")
+            messagebox.showinfo("Cart", f"Cart items:\n{cart_items}") #New Issue here to work on 
 
 
 if __name__ == "__main__":
