@@ -38,7 +38,7 @@ class Pie:
             self.price += 5.00
         elif size == "Large":
             self.size = "Large"
-            self.price += 10.00
+            self.price += 8.00
         else:
             print("Invalid size.")
 
@@ -80,13 +80,13 @@ class Cake():
             self.price += 0.00
         elif flavor == "Chocolate":
             self.flavor = "Chocolate"
-            self.price += 2.00
+            self.price += 1.50
         elif flavor == "Carrot":
             self.flavor = "Carrot"
-            self.price += 3.00
+            self.price += 2.00
         elif flavor == "New York Cheesecake":
             self.flavor = "New York Cheescake"
-            self.price += 5.00
+            self.price += 3.00
         else:
             print("Invalid flavor type.")
 
@@ -97,10 +97,10 @@ class Cake():
             self.price += 5.00
         elif size == "Medium":
             self.size = "Medium"
-            self.price += 10.0
+            self.price += 7.0
         elif size == "Large":
             self.size = "Large"
-            self.price += 15.0
+            self.price += 11.0
         else:
             print("Invalid size type.")
 
@@ -163,24 +163,24 @@ class Cookie(Dessert):
         self.price = 1.00  # Base price for a basic cookie
 
     def set_quantity(self, quantity):
-        # Set the icing and update the price accordingly
+        # Set the quantity and update the price accordingly
         if quantity == "Single":
             self.quantity = 1
-            self.price += 1.00
+            self.price += 0.00
         elif quantity == "Double":
             self.quantity = 2
-            self.price += 1.75
+            self.price += 1.00
         elif quantity == "6 Pack":
             self.quantity = 6
             self.price += 5.50
         elif quantity == "Dozen":
             self.quantity = 12
-            self.price += 11.25
+            self.price += 10.15
         elif quantity == "Baker's Dozen":
             self.quantity = 13
-            self.price += 11.50
+            self.price += 11.25
         else:
-            print("Invalid type.")
+            print("Invalid quantity.")
 
     def set_type(self, type):
         # Set the type of cookie and update the price accordingly
@@ -200,7 +200,7 @@ class Cookie(Dessert):
             print("Invalid type.")
 
     def set_size(self, size):
-        # Set the type of cookie and update the price accordingly
+        # Set the size of cookie and update the price accordingly
         if size == "Small":
             self.size = "Small"
             self.price += 0.00
@@ -214,10 +214,10 @@ class Cookie(Dessert):
             self.size = "Royal"
             self.price += 1.00
         else:
-            print("Invalid type.")
+            print("Invalid size.")
 
     def set_topping(self, topping):
-        # Set the type of cookie and update the price accordingly
+        # Set the topping of the cookie and update the price accordingly
         if topping == "None":
             self.topping = "No"
             self.price += 0.00
@@ -234,7 +234,7 @@ class Cookie(Dessert):
             self.topping = "Ice Cream"
             self.price += 2.00
         else:
-            print("Invalid type.")
+            print("Invalid topping.")
 
     def get_price(self):
         # Return the final price of the customized cookie
