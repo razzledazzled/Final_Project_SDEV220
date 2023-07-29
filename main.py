@@ -14,14 +14,14 @@ class DessertOrderApp:
 
     def create_widgets(self):
         # Create the buttons for each dessert type
-        pie_button = tk.Button(self.root, text="Build Your Pie", command=self.open_pie_customization)
+        pie_button = tk.Button(self.root, text="Build Your Pie",bg="salmon",font="Allegro", command=self.open_pie_customization)
         pie_button.pack()
 
-        cake_button = tk.Button(self.root, text="Customize Your Cake", command=self.open_cake_customization)
+        cake_button = tk.Button(self.root, text="Customize Your Cake",bg="salmon",font="Allegro", command=self.open_cake_customization)
         cake_button.pack()
 
         # Create a cart button to view the cart
-        cart_button = tk.Button(self.root, text="View Cart", command=self.view_cart)
+        cart_button = tk.Button(self.root, text="View Cart",bg="salmon",font="Allegro", command=self.view_cart)
         cart_button.pack(side='right', anchor='ne', padx=10, pady=10)
 
     def open_pie_customization(self):
@@ -132,5 +132,8 @@ if __name__ == "__main__":
 
     # Set the width and height of the main window
     root.geometry("400x300")
+    root.config(bg="maroon")
+
+
 
     root.mainloop()
