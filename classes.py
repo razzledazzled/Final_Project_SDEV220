@@ -68,8 +68,8 @@ class Cake():
         # Default values for a basic cake
         self.flavor = "Vanilla"
         self.size = "Small"
-        self.icing = "White Icing"
-        self.toppings = "None"
+        self.icing = "White"
+        self.toppings = "No"
         self.layers = 1
         self.price = 16.00  # Base price for a basic Cake
 
@@ -94,41 +94,44 @@ class Cake():
         # Set the size and update the price accordingly
         if size == "Small":
             self.size = "Small"
-            self.price += 0.00
+            self.price += 5.00
         elif size == "Medium":
             self.size = "Medium"
-            self.price += 0.5
+            self.price += 10.0
         elif size == "Large":
             self.size = "Large"
-            self.price = 1.00
+            self.price += 15.0
         else:
             print("Invalid crust type.")
 
     def set_icing(self, icing):
         # Set the icing and update the price accordingly
         if icing == "White Icing":
-            self.icing = "White Icing"
+            self.icing = "White"
             self.price += 0.00
-        elif icing == "Chocolate":
+        elif icing == "Chocolate Icing":
             self.icing = "Chocolate"
             self.price += 0.5
-        elif icing == "Berry":
+        elif icing == "Berry Icing":
             self.icing = "Berry"
-            self.price = 1.00
+            self.price += 1.00
         else:
             print("Invalid icing type.")
 
     def set_toppings(self, toppings):
         # Set the icing and update the price accordingly
-        if toppings == "White Icing":
-            self.toppings = "White Icing"
+        if toppings == "None":
+            self.toppings = "No"
             self.price += 0.00
-        elif toppings == "Chocolate":
-            self.toppings = "Chocolate"
-            self.price += 0.5
-        elif toppings == "Berry":
-            self.toppings = "Berry"
-            self.price = 1.00
+        elif toppings == "Chocolate Shavings":
+            self.toppings = "Chocolate Shavings"
+            self.price += 0.1
+        elif toppings == "Sprinkles":
+            self.toppings = "Sprinkles for"
+            self.price += 0.25
+        elif toppings == "Coconut":
+            self.toppings = "Coconut"
+            self.price += 1.00
         else:
             print("Invalid icing type.")
 

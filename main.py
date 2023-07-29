@@ -91,7 +91,9 @@ class DessertOrderApp:
         # Function to add the cusomized cake to the chart
         def add_to_cart():
             cake_instance.set_flavor(flavor_var.get())
-            #cake_instance.set_size(size_var.get()) #HERE WHEN NEW CLASS STUFF IS ADDED
+            cake_instance.set_size(size_var.get())
+            cake_instance.set_icing(icing_var.get())
+            cake_instance.set_toppings(toppings_var.get())
             self.cart.append(cake_instance)
             messagebox.showinfo("Success", "Cake added to cart!")
             # Close the "Customize Cake" subwindow after adding to the cart
@@ -102,9 +104,18 @@ class DessertOrderApp:
         flavor_label.pack()
         flavor_menu = tk.OptionMenu(cake_customization_window, flavor_var, "Vanilla", "Chocolate", "Carrot", "New York Cheesecake")
         flavor_menu.pack()
-        size_label = tk.Label(cake_customization_window, text="Size Type:")
+        size_label = tk.Label(cake_customization_window, text="Size:")
         size_label.pack()
         size_menu = tk.OptionMenu(cake_customization_window, size_var, "Small", "Medium", "Large")
+        size_menu.pack()
+        icing_label = tk.Label(cake_customization_window, text="Icing Type:")
+        icing_label.pack()
+        icing_menu = tk.OptionMenu(cake_customization_window, icing_var, "White Icing", "Chocolate Icing", "Berry Icing")
+        icing_menu.pack()
+        toppings_label = tk.Label(cake_customization_window, text="Topping:")
+        toppings_label.pack()
+        toppings_menu = tk.OptionMenu(cake_customization_window, toppings_var, "None", "Chocolate Shavings", "Sprinkles", "Coconut")
+        toppings_menu.pack()
         
         # Button to add the customized pie to the cart
         add_to_cart_button = tk.Button(cake_customization_window, text="Add to Cart", command=add_to_cart)
@@ -118,10 +129,10 @@ class DessertOrderApp:
             cart_items = []
             for dessert in self.cart:
                 if isinstance(dessert, Pie):
-                    cart_items.append(f"{dessert.crust_type} Pie ({dessert.size}, {dessert.filling}): ${dessert.get_price():.2f}")
+                    cart_items.append(f"{dessert.size} {dessert.filling} Pie ({dessert.crust_type} crust): ${dessert.get_price():.2f}")
                 elif isinstance(dessert, Cake):
                     # cart_items.append(f"{dessert.flavor} ")
-                    cart_items.append(f"{dessert.flavor} Cake: ({dessert.size}) ${dessert.get_price():.2f}")
+                    cart_items.append(f"{dessert.size} {dessert.flavor} Cake with {dessert.icing} icing and {dessert.toppings} toppings ({dessert.layers} layers): ${dessert.get_price():.2f}")
                 # Add more elif statements for other dessert types if needed
 
         cart_text = "\n".join(cart_items)
