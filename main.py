@@ -4,6 +4,7 @@ from classes import Pie
 from classes import Cake
 from classes import Cookie
 
+# Class that creates widgets and gui. Handles data processing
 class DessertOrderApp:
     def __init__(self, root):
         self.root = root
@@ -14,7 +15,7 @@ class DessertOrderApp:
         self.create_widgets()
 
     def create_widgets(self):
-        # Create the buttons for each dessert type
+        # Creates the buttons for each dessert type
         pie_button = tk.Button(self.root, text="Build Your Pie", command=self.open_pie_customization)
         pie_button.pack()
 
@@ -24,12 +25,12 @@ class DessertOrderApp:
         cookie_button = tk.Button(self.root, text="Create Your Cookies", command=self.open_cookie_customization)
         cookie_button.pack()
 
-        # Create a cart button to view the cart
+        # Creates a cart button to view the cart
         cart_button = tk.Button(self.root, text="View Cart", command=self.view_cart)
         cart_button.pack(side='right', anchor='ne', padx=10, pady=10)
 
     def open_pie_customization(self):
-        # Create a new subwindow for customizing the pie
+        # Creates a new subwindow for customizing the pie
         pie_customization_window = tk.Toplevel(self.root)
         pie_customization_window.title("Customize Pie")
 
@@ -51,10 +52,10 @@ class DessertOrderApp:
             pie_instance.set_filling(filling_var.get())
             self.cart.append(pie_instance)
             messagebox.showinfo("Success", "Pie added to cart!")
-            # Close the "Customize Pie" subwindow after adding to the cart
+            # Closes the "Customize Pie" subwindow after adding to the cart
             pie_customization_window.destroy()
 
-        # Create option menus for each pie attribute
+        # Creates option menus for each pie attribute
         crust_label = tk.Label(pie_customization_window, text="Crust Type:")
         crust_label.pack()
         crust_menu = tk.OptionMenu(pie_customization_window, crust_var, "Regular", "Graham Cracker", "Chocolate")
@@ -75,7 +76,7 @@ class DessertOrderApp:
         add_to_cart_button.pack()
 
     def open_cake_customization(self):
-        # Create a new subwindow for customizing the cake
+        # Creates a new subwindow for customizing the cake
         cake_customization_window = tk.Toplevel(self.root)
         cake_customization_window.title("Customize Cake")
 
@@ -109,18 +110,22 @@ class DessertOrderApp:
         flavor_label.pack()
         flavor_menu = tk.OptionMenu(cake_customization_window, flavor_var, "Vanilla", "Chocolate", "Carrot", "New York Cheesecake")
         flavor_menu.pack()
+
         size_label = tk.Label(cake_customization_window, text="Size:")
         size_label.pack()
         size_menu = tk.OptionMenu(cake_customization_window, size_var, "Small", "Medium", "Large")
         size_menu.pack()
+
         icing_label = tk.Label(cake_customization_window, text="Icing Type:")
         icing_label.pack()
         icing_menu = tk.OptionMenu(cake_customization_window, icing_var, "White Icing", "Chocolate Icing", "Berry Icing")
         icing_menu.pack()
+
         toppings_label = tk.Label(cake_customization_window, text="Topping:")
         toppings_label.pack()
         toppings_menu = tk.OptionMenu(cake_customization_window, toppings_var, "None", "Chocolate Shavings", "Sprinkles", "Coconut")
         toppings_menu.pack()
+
         layer_label = tk.Label(cake_customization_window, text="Layers:")
         layer_label.pack()
         layer_menu = tk.OptionMenu(cake_customization_window, layers_var, "1", "2", "3",)
@@ -131,23 +136,23 @@ class DessertOrderApp:
         add_to_cart_button.pack()
 
     def open_cookie_customization(self):
-        # Create a new subwindow for customizing the cookie
+        # Creates a new subwindow for customizing the cookie
         cookie_customization_window = tk.Toplevel(self.root)
         cookie_customization_window.title("Customize Cookie")
 
         # Set the width and height of window
         cookie_customization_window.geometry("600x500")
 
-        # Create a new instance of the cookie class for customization
+        # Creates a new instance of the cookie class for customization
         cookie_instance = Cookie()
 
-        # Create a variable to store the selected options
+        # Creates a variable to store the selected options
         type_var = tk.StringVar()
         quantity_var = tk.StringVar()
         topping_var = tk.StringVar()
         size_var = tk.StringVar()
 
-        # Function to add the cusomized cake to the chart
+        # Function to add the customized cookie to the chart
         def add_to_cart():
             cookie_instance.set_type(type_var.get())
             cookie_instance.set_size(size_var.get())
@@ -163,14 +168,17 @@ class DessertOrderApp:
         quantity_label.pack()
         quantity_menu = tk.OptionMenu(cookie_customization_window, quantity_var, "Single", "Double", "6 Pack", "Dozen", "Baker's Dozen")
         quantity_menu.pack()
+
         type_label = tk.Label(cookie_customization_window, text="Type of Cookies:")
         type_label.pack()
         type_menu = tk.OptionMenu(cookie_customization_window, type_var, "Chewy", "Crunchy", "Sugar", "Sandwich")
         type_menu.pack()
+
         size_label = tk.Label(cookie_customization_window, text="Size of Cookies:")
         size_label.pack()
         size_menu = tk.OptionMenu(cookie_customization_window, size_var, "Small", "Medium", "Large", "Royal")
         size_menu.pack()
+
         topping_label = tk.Label(cookie_customization_window, text="Topping for Cookies:")
         topping_label.pack()
         topping_menu = tk.OptionMenu(cookie_customization_window, topping_var, "None", "Chocolate Chip", "Frosting", "Macadamia Nut", "Ice Cream")
@@ -193,13 +201,10 @@ class DessertOrderApp:
                     cart_items.append(f"{dessert.size} {dessert.flavor} Cake with {dessert.icing} Icing and {dessert.toppings} Topping ({dessert.layers} layers): ${dessert.get_price():.2f}")
                 elif isinstance(dessert, Cookie):
                     cart_items.append(f"{dessert.quantity} {dessert.size} {dessert.type} cookies with {dessert.topping} toppings: ${dessert.get_price():.2f}")
-
-
         cart_text = "\n".join(cart_items)
         messagebox.showinfo("Cart", f"Cart items:\n{cart_text}")
 
-
-
+#Main looping program
 if __name__ == "__main__":
     root = tk.Tk()
     app = DessertOrderApp(root)
