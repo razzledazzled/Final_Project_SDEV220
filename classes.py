@@ -137,13 +137,13 @@ class Cake():
 
     def set_layers(self, layers):
         # set the number of layers and price accordingly
-        if layers == 1:
+        if layers == "1":
             self.layers = 1
             self.price += 0
-        elif layers == 2:
+        elif layers == "2":
             self.layers = 2
             self.price += 2.00
-        elif layers >= 3:
+        elif layers == "3":
             self.layers = 3
             self.price += 4.00
         else:

@@ -98,6 +98,7 @@ class DessertOrderApp:
             cake_instance.set_size(size_var.get())
             cake_instance.set_icing(icing_var.get())
             cake_instance.set_toppings(toppings_var.get())
+            cake_instance.set_layers(layers_var.get())
             self.cart.append(cake_instance)
             messagebox.showinfo("Success", "Cake added to cart!")
             # Close the "Customize Cake" subwindow after adding to the cart
@@ -122,7 +123,7 @@ class DessertOrderApp:
         toppings_menu.pack()
         layer_label = tk.Label(cake_customization_window, text="Layers:")
         layer_label.pack()
-        layer_menu = tk.OptionMenu(cake_customization_window, layers_var, 1, 2, 3,)
+        layer_menu = tk.OptionMenu(cake_customization_window, layers_var, "1", "2", "3",)
         layer_menu.pack()
         
         # Button to add the customized cake to the cart
@@ -187,9 +188,9 @@ class DessertOrderApp:
             cart_items = []
             for dessert in self.cart:
                 if isinstance(dessert, Pie):
-                    cart_items.append(f"{dessert.size} {dessert.filling} pie ({dessert.crust_type} crust): ${dessert.get_price():.2f}")
+                    cart_items.append(f"{dessert.size} {dessert.filling} Pie ({dessert.crust_type} Crust): ${dessert.get_price():.2f}")
                 elif isinstance(dessert, Cake):
-                    cart_items.append(f"{dessert.size} {dessert.flavor} cake with {dessert.icing} icing and {dessert.toppings} toppings ({dessert.layers} layers): ${dessert.get_price():.2f}")
+                    cart_items.append(f"{dessert.size} {dessert.flavor} Cake with {dessert.icing} Icing and {dessert.toppings} Topping ({dessert.layers} layers): ${dessert.get_price():.2f}")
                 elif isinstance(dessert, Cookie):
                     cart_items.append(f"{dessert.quantity} {dessert.size} {dessert.type} cookies with {dessert.topping} toppings: ${dessert.get_price():.2f}")
 
