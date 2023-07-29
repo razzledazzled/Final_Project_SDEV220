@@ -88,7 +88,7 @@ class Cake():
             self.flavor = "New York Cheescake"
             self.price += 5.00
         else:
-            print("Invalid crust type.")
+            print("Invalid flavor type.")
 
     def set_size(self, size):
         # Set the size and update the price accordingly
@@ -102,7 +102,7 @@ class Cake():
             self.size = "Large"
             self.price += 15.0
         else:
-            print("Invalid crust type.")
+            print("Invalid size type.")
 
     def set_icing(self, icing):
         # Set the icing and update the price accordingly
@@ -133,16 +133,41 @@ class Cake():
             self.toppings = "Coconut"
             self.price += 1.00
         else:
-            print("Invalid icing type.")
+            print("Invalid topping type.")
 
     def get_price(self):
         # Return the final price of the customized cake
         return self.price
 
-class Cookies(Dessert):
-    def __init__(self, name, price, quantity):
-        super().__init__(name, price)
-        self.quantity = quantity
+class Cookie(Dessert):
+    def __init__(self):
+        # Default values for a basic cookie
+        self.type = "Chewy"
+        self.size = "Small"
+        self.toppings = "No"
+        self.quantity = 1
+        self.price = 1.00  # Base price for a basic cookie
+
+    def set_type(self, type):
+        # Set the icing and update the price accordingly
+        if type == "Chewy":
+            self.type = "Chewy"
+            self.price += 0.00
+        elif type == "Chocolate Shavings":
+            self.type = "Chocolate Shavings"
+            self.price += 0.1
+        elif type == "Sprinkles":
+            self.type = "Sprinkles for"
+            self.price += 0.25
+        elif type == "Coconut":
+            self.type = "Coconut"
+            self.price += 1.00
+        else:
+            print("Invalid type.")
+
+    def get_price(self):
+        # Return the final price of the customized cookie
+        return self.price
 
     def __str__(self):
         return f"{super().__str__()}, Quantity: {self.quantity}"

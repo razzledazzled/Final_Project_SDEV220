@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from classes import Pie
 from classes import Cake
+from classes import Cookie
 
 class DessertOrderApp:
     def __init__(self, root):
@@ -20,6 +21,9 @@ class DessertOrderApp:
         cake_button = tk.Button(self.root, text="Customize Your Cake", command=self.open_cake_customization)
         cake_button.pack()
 
+        cookie_button = tk.Button(self.root, text="Create Your Cookies", command=self.open_cookie_customization)
+        cookie_button.pack()
+
         # Create a cart button to view the cart
         cart_button = tk.Button(self.root, text="View Cart", command=self.view_cart)
         cart_button.pack(side='right', anchor='ne', padx=10, pady=10)
@@ -30,7 +34,7 @@ class DessertOrderApp:
         pie_customization_window.title("Customize Pie")
 
         # Set the width and height of the window
-        pie_customization_window.geometry("400x200")
+        pie_customization_window.geometry("600x500")
 
         # Create a new instance of the Pie class for customization
         pie_instance = Pie()
@@ -76,7 +80,7 @@ class DessertOrderApp:
         cake_customization_window.title("Customize Cake")
 
         # Set the width and height of window
-        cake_customization_window.geometry("400x200")
+        cake_customization_window.geometry("600x500")
 
         # Create a new instance of the Cake class for customization
         cake_instance = Cake()
@@ -121,6 +125,14 @@ class DessertOrderApp:
         add_to_cart_button = tk.Button(cake_customization_window, text="Add to Cart", command=add_to_cart)
         add_to_cart_button.pack()
 
+    def open_cookie_customization(self):
+        # Create a new subwindow for customizing the cookie
+        cookie_customization_window = tk.Toplevel(self.root)
+        cookie_customization_window.title("Customize Cookie")
+
+        # Set the width and height of window
+        cookie_customization_window.geometry("600x500")
+
     def view_cart(self):
         # Display the selected desserts in the cart
         if not self.cart:
@@ -129,11 +141,12 @@ class DessertOrderApp:
             cart_items = []
             for dessert in self.cart:
                 if isinstance(dessert, Pie):
-                    cart_items.append(f"{dessert.size} {dessert.filling} Pie ({dessert.crust_type} crust): ${dessert.get_price():.2f}")
+                    cart_items.append(f"{dessert.size} {dessert.filling} pie ({dessert.crust_type} crust): ${dessert.get_price():.2f}")
                 elif isinstance(dessert, Cake):
-                    # cart_items.append(f"{dessert.flavor} ")
-                    cart_items.append(f"{dessert.size} {dessert.flavor} Cake with {dessert.icing} icing and {dessert.toppings} toppings ({dessert.layers} layers): ${dessert.get_price():.2f}")
-                # Add more elif statements for other dessert types if needed
+                    cart_items.append(f"{dessert.size} {dessert.flavor} cake with {dessert.icing} icing and {dessert.toppings} toppings ({dessert.layers} layers): ${dessert.get_price():.2f}")
+                elif isinstance(dessert, Cookie):
+                    cart_items.append(f"{dessert.quantity} {dessert.size} {dessert.type} cookies with {dessert.toppings}: ${dessert.get_price():.2f}")
+
 
         cart_text = "\n".join(cart_items)
         messagebox.showinfo("Cart", f"Cart items:\n{cart_text}")
