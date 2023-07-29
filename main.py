@@ -112,8 +112,18 @@ class DessertOrderApp:
         if not self.cart:
             messagebox.showinfo("Empty Cart", "Your cart is empty.")
         else:
-            cart_items = "\n".join([f"{dessert.crust_type} Pie ({dessert.size}, {dessert.filling}): ${dessert.get_price():.2f}" for dessert in self.cart])
-            messagebox.showinfo("Cart", f"Cart items:\n{cart_items}") #New Issue here to work on 
+            cart_items = []
+            for dessert in self.cart:
+                if isinstance(dessert, Pie):
+                    cart_items.append(f"{dessert.crust_type} Pie ({dessert.size}, {dessert.filling}): ${dessert.get_price():.2f}")
+                elif isinstance(dessert, Cake):
+                    cart_items.append(f"{dessert.flavor} ")
+                    # cart_items.append(f"{dessert.flavor} Cake: ${dessert.get_price():.2f}")
+                # Add more elif statements for other dessert types if needed
+
+        cart_text = "\n".join(cart_items)
+        messagebox.showinfo("Cart", f"Cart items:\n{cart_text}")
+
 
 
 if __name__ == "__main__":
