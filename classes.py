@@ -162,6 +162,26 @@ class Cookie(Dessert):
         self.quantity = 1
         self.price = 1.00  # Base price for a basic cookie
 
+    def set_quantity(self, quantity):
+        # Set the icing and update the price accordingly
+        if quantity == "Single":
+            self.quantity = 1
+            self.price += 1.00
+        elif quantity == "Double":
+            self.quantity = 2
+            self.price += 1.75
+        elif quantity == "6 Pack":
+            self.quantity = 6
+            self.price += 5.50
+        elif quantity == "Dozen":
+            self.quantity = 12
+            self.price += 11.25
+        elif quantity == "Bakers Dozen":
+            self.quantity = 13
+            self.price += 11.50
+        else:
+            print("Invalid type.")
+
     def set_type(self, type):
         # Set the icing and update the price accordingly
         if type == "Chewy":

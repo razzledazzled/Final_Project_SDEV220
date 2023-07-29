@@ -125,7 +125,7 @@ class DessertOrderApp:
         layer_menu = tk.OptionMenu(cake_customization_window, layers_var, 1, 2, 3,)
         layer_menu.pack()
         
-        # Button to add the customized pie to the cart
+        # Button to add the customized cake to the cart
         add_to_cart_button = tk.Button(cake_customization_window, text="Add to Cart", command=add_to_cart)
         add_to_cart_button.pack()
 
@@ -136,6 +136,36 @@ class DessertOrderApp:
 
         # Set the width and height of window
         cookie_customization_window.geometry("600x500")
+
+        # Create a new instance of the cookie class for customization
+        cookie_instance = Cookie()
+
+        # Create a variable to store the selected options
+        type_var = tk.StringVar()
+        quantity_var = tk.StringVar()
+        topping_var = tk.StringVar()
+        size_var = tk.StringVar()
+
+        # Function to add the cusomized cake to the chart
+        def add_to_cart():
+            cookie_instance.set_type(type_var.get())
+            #cookie_instance.set_size(size_var.get())
+            #cookie_instance.set_topping(topping_var.get())
+            cookie_instance.set_quantity(quantity_var.get())
+            self.cart.append(cookie_instance)
+            messagebox.showinfo("Success", "Cookie added to cart!")
+            # Close the "Customize Cookie" subwindow after adding to the cart
+            cookie_customization_window.destroy()
+
+        #Create option menus for each cookie attribute
+        quantity_label = tk.Label(cookie_customization_window, text="Number of Cookies:")
+        quantity_label.pack()
+        quantity_menu = tk.OptionMenu(cookie_customization_window, quantity_var, "Single", "Double", "6 Pack", "Dozen", "Baker's Dozen")
+        quantity_menu.pack()
+
+        # Button to add the customized cookie to the cart
+        add_to_cart_button = tk.Button(cookie_customization_window, text="Add to Cart", command=add_to_cart)
+        add_to_cart_button.pack()
 
     def view_cart(self):
         # Display the selected desserts in the cart
@@ -149,7 +179,7 @@ class DessertOrderApp:
                 elif isinstance(dessert, Cake):
                     cart_items.append(f"{dessert.size} {dessert.flavor} cake with {dessert.icing} icing and {dessert.toppings} toppings ({dessert.layers} layers): ${dessert.get_price():.2f}")
                 elif isinstance(dessert, Cookie):
-                    cart_items.append(f"{dessert.quantity} {dessert.size} {dessert.type} cookies with {dessert.toppings}: ${dessert.get_price():.2f}")
+                    cart_items.append(f"{dessert.quantity} {dessert.size} {dessert.type} cookies with {dessert.toppings} toppings: ${dessert.get_price():.2f}")
 
 
         cart_text = "\n".join(cart_items)
