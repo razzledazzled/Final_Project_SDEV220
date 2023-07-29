@@ -74,9 +74,9 @@ class Cake():
         self.price = 16.00  # Base price for a basic Cake
 
     def set_flavor(self, flavor):
-    # Set the crust type and update the price accordingly
+    # Set the flavor type and update the price accordingly
         if flavor == "Vanilla":
-            self.flavor = "Regular"
+            self.flavor = "Vanilla"
             self.price += 0.00
         elif flavor == "Chocolate":
             self.flavor = "Chocolate"
@@ -90,6 +90,51 @@ class Cake():
         else:
             print("Invalid crust type.")
 
+    def set_size(self, size):
+        # Set the size and update the price accordingly
+        if size == "Small":
+            self.size = "Small"
+            self.price += 0.00
+        elif size == "Medium":
+            self.size = "Medium"
+            self.price += 0.5
+        elif size == "Large":
+            self.size = "Large"
+            self.price = 1.00
+        else:
+            print("Invalid crust type.")
+
+    def set_icing(self, icing):
+        # Set the icing and update the price accordingly
+        if icing == "White Icing":
+            self.icing = "White Icing"
+            self.price += 0.00
+        elif icing == "Chocolate":
+            self.icing = "Chocolate"
+            self.price += 0.5
+        elif icing == "Berry":
+            self.icing = "Berry"
+            self.price = 1.00
+        else:
+            print("Invalid icing type.")
+
+    def set_toppings(self, toppings):
+        # Set the icing and update the price accordingly
+        if toppings == "White Icing":
+            self.toppings = "White Icing"
+            self.price += 0.00
+        elif toppings == "Chocolate":
+            self.toppings = "Chocolate"
+            self.price += 0.5
+        elif toppings == "Berry":
+            self.toppings = "Berry"
+            self.price = 1.00
+        else:
+            print("Invalid icing type.")
+
+    def get_price(self):
+        # Return the final price of the customized cake
+        return self.price
 
 class Cookies(Dessert):
     def __init__(self, name, price, quantity):
