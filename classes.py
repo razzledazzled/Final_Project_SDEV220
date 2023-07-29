@@ -176,26 +176,63 @@ class Cookie(Dessert):
         elif quantity == "Dozen":
             self.quantity = 12
             self.price += 11.25
-        elif quantity == "Bakers Dozen":
+        elif quantity == "Baker's Dozen":
             self.quantity = 13
             self.price += 11.50
         else:
             print("Invalid type.")
 
     def set_type(self, type):
-        # Set the icing and update the price accordingly
+        # Set the type of cookie and update the price accordingly
         if type == "Chewy":
             self.type = "Chewy"
             self.price += 0.00
-        elif type == "Chocolate Shavings":
-            self.type = "Chocolate Shavings"
-            self.price += 0.1
-        elif type == "Sprinkles":
-            self.type = "Sprinkles for"
+        elif type == "Crunchy":
+            self.type = "Crunchy"
+            self.price += 0.00
+        elif type == "Sugar":
+            self.type = "Sugar"
             self.price += 0.25
-        elif type == "Coconut":
-            self.type = "Coconut"
+        elif type == "Sandwich":
+            self.type = "Sandwich"
             self.price += 1.00
+        else:
+            print("Invalid type.")
+
+    def set_size(self, size):
+        # Set the type of cookie and update the price accordingly
+        if size == "Small":
+            self.size = "Small"
+            self.price += 0.00
+        elif size == "Medium":
+            self.size = "Medium"
+            self.price += 0.00
+        elif size == "Large":
+            self.size = "Large"
+            self.price += 0.25
+        elif size == "Royal":
+            self.size = "Royal"
+            self.price += 1.00
+        else:
+            print("Invalid type.")
+
+    def set_topping(self, topping):
+        # Set the type of cookie and update the price accordingly
+        if topping == "None":
+            self.topping = "No"
+            self.price += 0.00
+        elif topping == "Chocolate Chip":
+            self.topping = "Chocolate Chip"
+            self.price += 0.00
+        elif topping == "Frosting":
+            self.topping = "Frosting"
+            self.price += 0.25
+        elif topping == "Macadamia Nut":
+            self.topping = "Macadmia Nut"
+            self.price += .50
+        elif topping == "Ice Cream":
+            self.topping = "Ice Cream"
+            self.price += 2.00
         else:
             print("Invalid type.")
 

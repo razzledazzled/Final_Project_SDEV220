@@ -149,8 +149,8 @@ class DessertOrderApp:
         # Function to add the cusomized cake to the chart
         def add_to_cart():
             cookie_instance.set_type(type_var.get())
-            #cookie_instance.set_size(size_var.get())
-            #cookie_instance.set_topping(topping_var.get())
+            cookie_instance.set_size(size_var.get())
+            cookie_instance.set_topping(topping_var.get())
             cookie_instance.set_quantity(quantity_var.get())
             self.cart.append(cookie_instance)
             messagebox.showinfo("Success", "Cookie added to cart!")
@@ -162,6 +162,18 @@ class DessertOrderApp:
         quantity_label.pack()
         quantity_menu = tk.OptionMenu(cookie_customization_window, quantity_var, "Single", "Double", "6 Pack", "Dozen", "Baker's Dozen")
         quantity_menu.pack()
+        type_label = tk.Label(cookie_customization_window, text="Type of Cookies:")
+        type_label.pack()
+        type_menu = tk.OptionMenu(cookie_customization_window, type_var, "Chewy", "Crunchy", "Sugar", "Sandwich")
+        type_menu.pack()
+        size_label = tk.Label(cookie_customization_window, text="Size of Cookies:")
+        size_label.pack()
+        size_menu = tk.OptionMenu(cookie_customization_window, size_var, "Small", "Medium", "Large", "Royal")
+        size_menu.pack()
+        topping_label = tk.Label(cookie_customization_window, text="Topping for Cookies:")
+        topping_label.pack()
+        topping_menu = tk.OptionMenu(cookie_customization_window, topping_var, "None", "Chocolate Chip", "Frosting", "Macadamia Nut", "Ice Cream")
+        topping_menu.pack()
 
         # Button to add the customized cookie to the cart
         add_to_cart_button = tk.Button(cookie_customization_window, text="Add to Cart", command=add_to_cart)
@@ -179,7 +191,7 @@ class DessertOrderApp:
                 elif isinstance(dessert, Cake):
                     cart_items.append(f"{dessert.size} {dessert.flavor} cake with {dessert.icing} icing and {dessert.toppings} toppings ({dessert.layers} layers): ${dessert.get_price():.2f}")
                 elif isinstance(dessert, Cookie):
-                    cart_items.append(f"{dessert.quantity} {dessert.size} {dessert.type} cookies with {dessert.toppings} toppings: ${dessert.get_price():.2f}")
+                    cart_items.append(f"{dessert.quantity} {dessert.size} {dessert.type} cookies with {dessert.topping} toppings: ${dessert.get_price():.2f}")
 
 
         cart_text = "\n".join(cart_items)
