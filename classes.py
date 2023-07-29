@@ -135,6 +135,20 @@ class Cake():
         else:
             print("Invalid topping type.")
 
+    def set_layers(self, layers):
+        # set the number of layers and price accordingly
+        if layers == 1:
+            self.layers = 1
+            self.price += 0
+        elif layers == 2:
+            self.layers = 2
+            self.price += 2.00
+        elif layers >= 3:
+            self.layers = 3
+            self.price += 4.00
+        else:
+            print("Invalid number of layers")
+
     def get_price(self):
         # Return the final price of the customized cake
         return self.price

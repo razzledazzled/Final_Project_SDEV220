@@ -120,6 +120,10 @@ class DessertOrderApp:
         toppings_label.pack()
         toppings_menu = tk.OptionMenu(cake_customization_window, toppings_var, "None", "Chocolate Shavings", "Sprinkles", "Coconut")
         toppings_menu.pack()
+        layer_label = tk.Label(cake_customization_window, text="Layers:")
+        layer_label.pack()
+        layer_menu = tk.OptionMenu(cake_customization_window, layers_var, 1, 2, 3,)
+        layer_menu.pack()
         
         # Button to add the customized pie to the cart
         add_to_cart_button = tk.Button(cake_customization_window, text="Add to Cart", command=add_to_cart)
